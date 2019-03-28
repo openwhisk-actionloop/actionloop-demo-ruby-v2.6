@@ -1,4 +1,4 @@
-IMG=actionloop-demo-python-v3.7:latest
+IMG=actionloop-demo-ruby-v2.6:latest
 INVOKE=python ../tools/invoke.py
 PREFIX=docker.io/actionloop
 
@@ -14,10 +14,10 @@ clean:
 	docker rmi -f $(IMG)
 
 start: build
-	docker run -p 8080:8080 -ti -v $(PWD):/proxy $(IMG) 
+	docker run -p 8080:8080 -ti -v $(PWD):/proxy $(IMG)
 
 debug: build
-	docker run -p 8080:8080 -ti --entrypoint=/bin/sh -v $(PWD):/proxy $(IMG) 
+	docker run -p 8080:8080 -ti --entrypoint=/bin/sh -v $(PWD):/proxy $(IMG)
 
 .PHONY: build push clean start debug
 

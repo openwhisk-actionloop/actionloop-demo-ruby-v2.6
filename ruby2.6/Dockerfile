@@ -14,12 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-FROM actionloop/actionloop-v2:latest as builder
-FROM python:3.7-alpine
+FROM openwhisk/actionloop-v2:latest as builder
+#FROM python:3.7-alpine
+FROM ruby:2.6.2-alpine3.9
 RUN mkdir -p /proxy/bin /proxy/lib /proxy/action
 WORKDIR /proxy
 COPY --from=builder bin/proxy /bin/proxy
-ADD lib/launcher.py /proxy/lib/launcher.py
+#ADD lib/launcher.py /proxy/lib/launcher.py
+ADD lib/launcher.rb /proxy/lib/launcher.rb
 ADD bin/compile /proxy/bin/compile
 ENV OW_COMPILER=/proxy/bin/compile
 ENTRYPOINT ["/bin/proxy"]
