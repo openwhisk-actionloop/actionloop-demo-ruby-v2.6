@@ -1,8 +1,8 @@
-IMG=actionloop/actionloop-demo-python-v3.7:latest
-ACT=hello-demo-python
+IMG=actionloop-demo-ruby-v2.6:latest
+ACT=hello-demo-ruby
 
 src.zip:
-	zip src.zip __main__.py hello.py
+	zip src.zip main.rb hello.rb
 
 bin.zip: src.zip
 	docker run -i $(IMG) -compile main <src.zip >bin.zip
@@ -21,6 +21,4 @@ test:
 	wsk action invoke $(ACT) -p name Mike -r
 
 .PHONE: single src-zip bin-zip
-
-
 

@@ -14,36 +14,45 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-from __future__ import print_function
-from sys import stdin
-from sys import stdout
-from sys import stderr
-from os import fdopen
-import sys, os, json, traceback
+require "logger"
+require "json"
 
-# now import the action as process input/output
-from main__ import main as main
+# requiring user's action code
+require "./main__"
 
-env = os.environ
-out = fdopen(3, "wb")
-while True:
-  line = stdin.readline()
-  if not line: break
-  args = json.loads(line)
+# open our file descriptor, this allows us to talk to the go-proxy parent process
+# code gets executed via file descriptor #3
+#out = File.for_fd(3)
+out = IO.new(3)
+
+# run this until process gets killed
+while true
+  # JSON arguments get passed via STDIN
+  line = STDIN.gets()
+  break unless line
+
+  # parse JSON arguments that come in via the value parameter
+  args = JSON.parse(line)
   payload = {}
-  for key in args:
-    if key == "value":
-      payload = args["value"]
-    else:
-      env["__OW_%s" % key.upper()]= args[key]
+  args.each do |key, value|
+    if key == "value"
+      payload = value
+    else
+      # set environment variables for other keys
+      env["__OW_#{key.upcase}"] = value
+    end
+  end
+  # execute the user's action code
   res = {}
-  try:
+  begin
     res = main(payload)
-  except Exception as ex:
-    print(traceback.format_exc(), file=stderr)
-    res = {"error": str(ex)}
-  out.write(json.dumps(res, ensure_ascii=False).encode('utf-8'))
-  out.write(b'\n')
-  stdout.flush()
-  stderr.flush()
+  rescue Exception => e
+    puts "exception: #{e}"
+    res ["error"] = "#{e}"
+  end
+
+  STDOUT.flush()
+  STDERR.flush()
+  out.puts(res.to_json)
   out.flush()
+end
