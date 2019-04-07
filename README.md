@@ -16,7 +16,6 @@
 # limitations under the License.
 #
 -->
-# ActionLoop Started Kit
+# Demo of the ActionLoop Ruby Runtime
 
-Use the content of this folder to build your own ActionLoop based runtime.
 
