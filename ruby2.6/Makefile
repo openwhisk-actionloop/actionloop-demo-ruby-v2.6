@@ -23,7 +23,7 @@ debug: build
 
 ## You need to execute make start in another terminal 
 test-single:
-	$(INVOKE) init hello ../example/hello.py
+	$(INVOKE) init hello ../example/hello.rb
 	$(INVOKE) run '{}'
 	$(INVOKE) run '{"name":"Mike"}'
 

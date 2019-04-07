@@ -14,7 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import hello
+
+require "./hello"
 
 def main(args):
-    return hello.hello(args)
+    hello(args)

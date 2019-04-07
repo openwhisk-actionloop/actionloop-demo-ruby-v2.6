@@ -64,7 +64,7 @@ def build(src_dir, tgt_dir):
     shutil.move(src_dir, tgt_dir)
     write_file("%s/exec" % tgt_dir, """#!/bin/sh
 cd "$(dirname $0)"
-exec ruby exec__.rb
+exec /usr/local/bin/ruby exec__.rb
 """)
 
 if __name__ == '__main__':

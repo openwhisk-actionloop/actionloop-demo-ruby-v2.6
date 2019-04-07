@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-FROM openwhisk/actionloop-v2:latest as builder
+FROM actionloop/actionloop-v2:latest as builder
 #FROM python:3.7-alpine
 FROM ruby:2.6.2-alpine3.9
 RUN mkdir -p /proxy/bin /proxy/lib /proxy/action
@@ -23,5 +23,6 @@ COPY --from=builder bin/proxy /bin/proxy
 #ADD lib/launcher.py /proxy/lib/launcher.py
 ADD lib/launcher.rb /proxy/lib/launcher.rb
 ADD bin/compile /proxy/bin/compile
+RUN apk update && apk add python3
 ENV OW_COMPILER=/proxy/bin/compile
 ENTRYPOINT ["/bin/proxy"]
