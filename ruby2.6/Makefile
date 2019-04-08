@@ -33,7 +33,7 @@ test-src-zip:
 	$(INVOKE) run '{}'
 	$(INVOKE) run '{"name":"Mike"}'
 
-test-bin-dir:
+test-bin-zip:
 	$(MAKE) -C ../example bin.zip
 	$(INVOKE) init ../example/bin.zip
 	$(INVOKE) run '{}'

@@ -17,5 +17,6 @@
 
 require "./hello"
 
-def main(args):
+def main(args)
     hello(args)
+end
