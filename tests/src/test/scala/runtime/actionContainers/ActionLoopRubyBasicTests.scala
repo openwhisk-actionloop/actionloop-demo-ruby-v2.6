@@ -23,7 +23,7 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
-class ActionLoopPythonBasicTests extends BasicActionRunnerTests with WskActorSystem {
+class ActionLoopPythoRubyTests extends BasicActionRunnerTests with WskActorSystem {
 
   val image = "actionloop-demo-ruby-v2.6"
 
