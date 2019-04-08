@@ -39,7 +39,7 @@ while true
       payload = value
     else
       # set environment variables for other keys
-      env["__OW_#{key.upcase}"] = value
+      ENV["__OW_#{key.upcase}"] = value
     end
   end
   # execute the user's action code

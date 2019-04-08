@@ -65,16 +65,15 @@ class ActionLoopPythonBasicTests extends BasicActionRunnerTests with WskActorSys
   override val testEnv = TestConfig(
     """|def main(args)
        |  {
-       |       "env" => ENV,
        |       "api_host" => ENV['__OW_API_HOST'],
-       |       "api_kery" => ENV['__OW_API_KEY'],
+       |       "api_key" => ENV['__OW_API_KEY'],
        |       "namespace" => ENV['__OW_NAMESPACE'],
        |       "action_name" => ENV['__OW_ACTION_NAME'],
        |       "activation_id" => ENV['__OW_ACTIVATION_ID'],
        |       "deadline" => ENV['__OW_DEADLINE']
        |  }
        |end
-       |""".stripMargin)
+       |""".stripMargin, enforceEmptyOutputStream=false)
 
   override val testInitCannotBeCalledMoreThanOnce = TestConfig(
     s"""|def main(args)
